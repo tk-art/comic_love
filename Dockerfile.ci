@@ -43,8 +43,3 @@ RUN apt-get update                                                              
   && chmod 755 ~/chromedriver                                                                                                           \
   && mv ~/chromedriver /usr/bin/chromedriver                                                                                            \
   && apt-get clean
-
-RUN mkdir /potepanec
-WORKDIR /potepanec
-COPY . /potepanec
-RUN bundle install
