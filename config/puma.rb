@@ -13,10 +13,7 @@ port        ENV.fetch('PORT') { 3000 }
 
 # Specifies the `environment` that Puma will run in.
 #
-environment ENV.fetch('RAILS_ENV') { 'development' }
-
-# Specifies the `pidfile` that Puma will use.
-pidfile ENV.fetch('PIDFILE') { 'tmp/pids/server.pid' }
+environment ENV.fetch('RAILS_ENV') { ENV['RACK_ENV'] || 'production' }
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
