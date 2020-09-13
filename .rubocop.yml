@@ -10,6 +10,9 @@ Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+ClassAndModuleChildren:
+  EnforcedStyle: compact
+
 AllCops:
   Exclude:
     - 'bin/*'

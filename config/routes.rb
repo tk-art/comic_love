@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   root to: 'users#home'
   get 'about', to: 'users#about'
 
-  resources :users, only: [:index, :show]
+  resources :users, only: %i[index show]
 end

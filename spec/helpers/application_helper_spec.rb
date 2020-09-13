@@ -17,7 +17,7 @@ RSpec.describe ApplicationHelper, type: :helper do
     end
 
     context '空文字が与えられた場合' do
-      let(:title) { "" }
+      let(:title) { '' }
 
       it { is_expected.to eq 'Comic Share' }
     end

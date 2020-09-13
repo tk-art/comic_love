@@ -3,7 +3,7 @@ jobs:
   rspec:
     working_directory: ~/comic
     docker:
-      - image: circleci/ruby
+      - image: circleci/ruby:2.5.1
     steps:
       - checkout
       - setup_remote_docker
@@ -73,9 +73,6 @@ jobs:
           name: Run post-deploy tasks
           command: |
             heroku config:set AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-            heroku config:set S3_HOST_NAME=$S3_HOST_NAME
-            heroku config:set S3_REGION=$S3_REGION
-            heroku config:set S3_BUCKET=$S3_BUCKET
             heroku run bin/rails db:migrate
 
 orbs:
@@ -88,7 +85,7 @@ workflows:
       - rspec
       - rubocop
       - heroku_deploy:
-          context: s3_bucket
+          # context: s3_bucket
           requires:
             - rspec
             - rubocop
