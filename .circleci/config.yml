@@ -45,7 +45,7 @@ jobs:
       - image: sue445/heroku-cli
     steps:
       - checkout
-      - build-tools/install_ci_tools
+      - build-tools/install-ci-tools
       - jq/install
       - run:
           name: Identify who I am
