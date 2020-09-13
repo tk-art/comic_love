@@ -14,8 +14,12 @@ jobs:
             docker-compose up -d
             docker exec comic_web_1 curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
       - run:
-          name: Run rspec
-          command: docker-compose exec web rspec
+        name: Setup database
+        command: |
+          docker-compose exec potepanec bash -c 'yes n
+      - run:
+        name: Run rspec
+        command: docker-compose exec web rspec
 
   rubocop:
     working_directory: ~/comic
@@ -82,7 +86,6 @@ workflows:
       - rspec
       - rubocop
       - heroku_deploy:
-          # context: s3_bucket
           requires:
             - rspec
             - rubocop
