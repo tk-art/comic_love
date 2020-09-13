@@ -33,10 +33,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'bootstrap-sass', '3.4.1'
+gem 'jquery-rails'
+gem 'font-awesome-sass'
 
 gem 'devise'
-gem 'omniauth'
-gem 'omniauth-facebook'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
