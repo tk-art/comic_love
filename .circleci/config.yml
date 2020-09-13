@@ -17,6 +17,7 @@ jobs:
           name: Setup database
           command: |
             docker-compose exec web bash -c 'yes n
+      - run:
           name: Run rspec
           command: docker-compose exec web rspec
 
