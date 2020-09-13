@@ -3,7 +3,7 @@ jobs:
   rspec:
     working_directory: ~/comic
     docker:
-      - image: circleci/ruby:2.5.1
+      - image: circleci/ruby
     steps:
       - checkout
       - setup_remote_docker
