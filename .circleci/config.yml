@@ -3,7 +3,7 @@ jobs:
   rspec:
     working_directory: ~/comic
     docker:
-      - image: circleci/ruby
+      - image: circleci/ruby:2.5.1
     steps:
       - checkout
       - setup_remote_docker
@@ -12,14 +12,9 @@ jobs:
           command: |
             set -x
             docker-compose up -d
-            docker exec comic_web_1 curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
       - run:
-        name: Setup database
-        command: |
-          docker-compose exec web bash -c 'yes n
-      - run:
-        name: Run rspec
-        command: docker-compose exec web rspec
+          name: Run rspec
+          command: docker-compose exec web rspec
 
   rubocop:
     working_directory: ~/comic
@@ -50,7 +45,7 @@ jobs:
       - image: sue445/heroku-cli
     steps:
       - checkout
-      - build-tools/install-ci-tools
+      - build-tools/install_ci_tools
       - jq/install
       - run:
           name: Identify who I am
