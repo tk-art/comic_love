@@ -1,3 +1,5 @@
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
 
 $gray-medius-light: #eaeaea;
 $light-gray: #777;
@@ -6,6 +8,31 @@ $light-gray: #777;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+.up-btn {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 20px;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.btn-green-moon {
+  background: #56ab2f;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff;
+  border: 3px solid #eee;
+}
+
+.btn-dark-blue {
+  background: #7474BF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #348AC7, #7474BF);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #348AC7, #7474BF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff;
+  border: 3px solid #eee;
 }
 
 main {
@@ -32,9 +59,25 @@ input {
   height: auto !important;
 }
 
+.actions {
+  padding-bottom: 15px;
+  border-radius: 30px;
+
+}
+
+//flash
+.notice {
+  color: #468847;
+  background-color: #dff0d8;
+  padding: 15px;
+}
+.alert {
+  color: #b94a48;
+  background-color: #f2dede;
+}
+
 .checkbox {
-  margin-top: -10px;
-  margin-bottom: 10px;
+  height: 40px;
   span {
     margin-left: 20px;
     font-weight: normal;
@@ -50,15 +93,40 @@ input {
   margin-bottom: 30px;
 }
 
+.form {
+  border-radius: 5px;
+  padding: 14px 12px;
+  font-family: serif;
+  color: $light-gray;
+}
+
+.edit-image {
+  input {
+    display: none;
+  }
+}
+
+.icon-image {
+  width: 160px;
+  height: 160px;
+  border-radius: 100px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
 
 // header
 #logo {
   font-size: 25px;
   color: #00fa9a;
 }
-
-
-
 
 // footer
 #footer {
@@ -69,4 +137,31 @@ input {
 
 .fa-copyright {
   color: #c0c0c0;
+}
+
+//about
+.about {
+  color: $light-gray;
+  font-family: serif;
+  h1 {
+    font-family: arial;
+    padding-top: 100px;
+    padding-bottom: 20px;
+  }
+  h4 {
+    padding-bottom: 20px;
+  }
+
+  p {
+    font-size: 18px;
+    padding-bottom: 20px;
+    line-height: 58px;
+    margin-bottom: 80px;
+  }
+}
+
+//profile
+.prof {
+  padding-bottom: 8px;
+  border-bottom: 1px solid #DCDCDC;
 }
