@@ -34,8 +34,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'bootstrap-sass', '3.4.1'
 gem 'carrierwave'
+gem 'faker'
 gem 'font-awesome-sass'
 gem 'jquery-rails'
+gem 'kaminari'
 gem 'rails-i18n'
 
 gem 'devise'

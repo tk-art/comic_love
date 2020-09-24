@@ -4,7 +4,8 @@ FactoryBot.define do
     sequence(:email) { |n| "person_#{n}@example.com" }
     password { 'foobar' }
     password_confirmation { 'foobar' }
-    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/files/default.jpg')) }
+    image { File.open('./spec/fixtures/files/default.jpg', 'r') }
+    # image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/files/default.jpg')) }
     profile { 'はじめたばかりなので、宜しく' }
   end
 end

@@ -26,4 +26,23 @@ RSpec.describe ApplicationHelper, type: :helper do
       it { expect(full_title).to eq 'Comic Share' }
     end
   end
+
+  describe '#current_user?' do
+    let(:current_user) { create(:user) }
+    let(:user) { create(:user) }
+
+    it 'userがnilの場合、nilがかえって失敗する' do
+      user = nil
+      expect(current_user?(user)).to eq nil
+    end
+
+    it '引数として与えられたuserとログイン済みのcurrent_userが一致しなければ失敗する' do
+      expect(current_user?(user)).to be_falsey
+    end
+
+    it '引数として与えられたuserとログイン済みのcurrent_userが一致すれば成功する' do
+      user = current_user
+      expect(current_user?(user)).to be_truthy
+    end
+  end
 end

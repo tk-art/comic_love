@@ -4,15 +4,6 @@ RSpec.describe 'Users', type: :system do
   describe 'Sign Up' do
     let(:user) { create(:user) }
 
-    it '有効な値が入力されたら、ユーザー数が増える' do
-      expect do
-        sign_up_with(user.name,
-                     user.email,
-                     user.password,
-                     user.password_confirmation)
-      end.to change(User, :count).by(1)
-    end
-
     it '名前が空なら、エラーメッセージが表示される' do
       sign_up_with('', user.email, user.password, user.password_confirmation)
       expect(page).to have_content '名前が入力されていません'

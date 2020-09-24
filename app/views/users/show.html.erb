@@ -6,8 +6,10 @@
       <%= image_tag @image, class: "icon-image", alt: "icon-image" %>
     </div>
     <div class="col-md-8">
+      <%= render 'follow_form', user: @user %>
       <h4><%= @user.name %></h4>
       <div><%= simple_format(@user.profile) %></div>
+      <%= render 'shared/stat', user: @user %>
       <% if @user == current_user %>
         <div><%= link_to 'プロフィールを編集する', edit_user_registration_path %></div>
         <div><%= link_to 'アカウントを削除する', user_registration_path, method: :delete %></div>

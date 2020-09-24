@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'user validates' do
+  describe 'users validates' do
     let(:user) { create(:user) }
     let(:other_user) { create(:user) }
 
