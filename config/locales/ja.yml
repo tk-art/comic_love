@@ -10,3 +10,10 @@ ja:
         password_confirmation: パスワード確認値
         image: プロフィール写真
         profile: プロフィール
+  views:
+    pagination:
+      first: <i class="fas fa-angle-double-left"></i>
+      last: <i class="fas fa-angle-double-right"></i>
+      previous: <i class="fas fa-angle-left"></i>
+      next: <i class="fas fa-angle-right"></i>
+      truncate: "..."

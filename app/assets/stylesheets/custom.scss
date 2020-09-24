@@ -59,10 +59,75 @@ input {
   height: auto !important;
 }
 
+//aside
+section.user_info {
+  margin-top: 20px;
+}
+section {
+  padding: 10px 0;
+  margin-top: 20px;
+  &:first-child {
+    border: 0;
+    padding-top: 0;
+  }
+}
+
+
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
+}
+
 .actions {
   padding-bottom: 15px;
   border-radius: 30px;
+}
 
+//paginate
+.pagination {
+  li {
+    a {
+      border: none;
+      color: #696969;
+      &:hover {
+        background: #93c9ff;
+        border-radius: 15px;
+      }
+    }
+  }
+}
+
+.pagination {
+  .active {
+    a {
+      background: #93c9ff;
+      border-radius: 15px;
+    }
+  }
+}
+
+.fa-user-circle {
+  color: $light-gray;
+}
+
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 15px 0;
+    border-bottom: 1px solid $gray-lighter;
+  }
+}
+
+.users.follow {
+  padding: 0;
+}
+
+.follow-title {
+  font-family: serif;
 }
 
 //flash
@@ -100,6 +165,25 @@ input {
   color: $light-gray;
 }
 
+.stats {
+  overflow: auto;
+  margin-bottom: 10px;
+  padding: 0;
+  a {
+    float: left;
+    padding: 0 10px;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: rgb(99, 142, 170);
+    }
+  }
+}
+
 .edit-image {
   input {
     display: none;
@@ -109,6 +193,23 @@ input {
 .icon-image {
   width: 160px;
   height: 160px;
+  border-radius: 100px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.icon2 {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
   border-radius: 100px;
   object-fit: cover;
   overflow: hidden;

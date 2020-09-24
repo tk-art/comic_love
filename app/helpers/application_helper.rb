@@ -6,4 +6,8 @@ module ApplicationHelper
       "#{page_title} - #{Constants::BASE_TITLE}"
     end
   end
+
+  def current_user?(user)
+    user && user == current_user
+  end
 end

@@ -31,6 +31,8 @@ module Comic
     # Don't generate system test files.
     config.generators.system_tests = nil
 
+    config.action_view.embed_authenticity_token_in_remote_forms = true
+
     config.time_zone = 'Tokyo'
     config.generators.stylesheets    = false
     config.generators.javascripts    = false
@@ -39,12 +41,15 @@ module Comic
     config.generators do |g|
       g.test_framework :rspec,
       fixtures: false,
-      factories: false,
       view_specs: false,
       routing_specs: false,
       controller_specs: false,
       request_specs: true,
       system_specs: true
+    end
+
+    config.generators do |g|
+      g.factory_bot false
     end
   end
 end
