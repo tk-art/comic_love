@@ -21,7 +21,7 @@ RSpec.describe 'Users', type: :system do
       visit users_path
       expect(page).to have_css '.pagination'
       expect(page).to have_css '.icon2', count: 15
-      click_on "2"
+      click_on '2'
       expect(page).to have_css '.icon2', count: 6
     end
   end
