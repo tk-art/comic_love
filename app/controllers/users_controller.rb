@@ -3,7 +3,9 @@ class UsersController < ApplicationController
 
   def about; end
 
-  def index; end
+  def index
+    @users = User.page(params[:page]).order(id: "ASC").per(15)
+  end
 
   def show
     @user = User.find(params[:id])

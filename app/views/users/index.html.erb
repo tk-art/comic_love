@@ -1,1 +1,11 @@
-<h1>takumi</h1>
+<% provide(:title, "All Users") %>
+<div class="container">
+  <div class="row">
+    <h1>全てのユーザー</h1>
+
+    <div class="users">
+      <%= render @users %>
+    </div>
+    <%= paginate @users %>
+  </div>
+</div>
