@@ -1,32 +1,29 @@
 version: 2.1
 jobs:
-  working_directory: ~/comic
-  docker:
-    - image: circleci/ruby:2.5.1
-      environment:
-        RAILS_ENV: test
-    - image: circleci/mysql:8.0
-      environment:
-        MYSQL_USERNAME: root
-  steps:
-    - checkout
-    - restore_cache:
-        keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-    - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
-    - run: yarn install
-    - save_cache:
-        paths:
-          - ./vendor/bundle
-        key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-    - run: bundle exec rails db:create
-    - run: bundle exec rails db:schema:load
-    # Rspec
-    - run:
-        name: Rspec
-        command: bundle exec rspec
+  rspec:
+    working_directory: ~/comic
+    docker:
+      - image: circleci/ruby
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Setup environment variable
+          command: |
+            echo "export COMPOSE_FILE=docker-compose.yml" >> $BASH_ENV
+      - run:
+          name: Start containers and verify it is working
+          command: |
+            set -x
+            docker-compose up -d
+            docker exec comic_web_1 curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
+      - run:
+          name: Setup database
+          command: |
+            docker-compose exec web bundle exec rails db:schema:load
+      - run:
+          name: Run rspec
+          command: docker-compose exec web bundle exec rspec
 
   rubocop:
     working_directory: ~/comic
