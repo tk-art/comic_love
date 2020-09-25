@@ -15,7 +15,7 @@ jobs:
           name: Start containers and verify it is working
           command: |
             set -x
-            docker-compose up -d
+            docker-compose up
       - run:
           name: Setup database
           command: |
