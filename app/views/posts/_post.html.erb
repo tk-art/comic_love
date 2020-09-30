@@ -11,7 +11,7 @@
           <span class="timestamp">　
             <%= time_ago_in_words(post.created_at) %> 前に投稿　
             <% if current_user?(post.user) %>
-              <%= link_to "削除", post, method: :delete,
+              <%= link_to "投稿を削除", post, method: :delete,
                                   data: { confirm: "削除してもよろしいですか？" } %>
             <% end %>
           </span>
