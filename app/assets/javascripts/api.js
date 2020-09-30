@@ -3,10 +3,10 @@ $('#takumi').css("color","#d9534f");
 
 
 $(document).ready(function(){
-  let isbn_field = '#isbn';
-  let image_field = '#image';
-  let title_field = '#title';
-  let url_field = '#url';
+  var isbn_field = '#isbn';
+  var image_field = '#image';
+  var title_field = '#title';
+  var url_field = '#url';
   if ($(isbn_field).val()) {
     $(image_field).val('');
     $(title_field).val('');
