@@ -1,10 +1,11 @@
-<div class="navbar navbar-fixed-top navbar-inverse">
+<div class="navbar navbar-fixed-top navbar-light nav-height">
   <div class="container">
-    <%= link_to "COMIC SHARE", root_path, id: "logo" %>
     <nav>
+      <%= link_to "COMIC SHARE", root_path, id: "logo" %>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "COMIC SHAREとは？", about_path %></li>
         <% if user_signed_in? %>
+          <li><%= link_to "投稿する", search_path %>
           <li><%= link_to "通知", "#" %></li>
           <li><%= link_to "お気に入り", "#" %></li>
           <li class="dropdown">
@@ -12,11 +13,11 @@
               My Page<b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "プロフィール", user_path(current_user.id) %></li>
-              <li><%= link_to "ユーザー",  users_path %></li>
+              <li><%= link_to "プロフィール", user_path(current_user.id), class: "d-item" %></li>
+              <li><%= link_to "ユーザー",  users_path, class: "d-item" %></li>
               <li class="divider"></li>
               <li>
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "d-item" %>
               </li>
             </ul>
           </li>

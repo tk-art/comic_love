@@ -1,0 +1,10 @@
+<div class="item-search">
+  <h3><%= link_to item.title, new_post_path, class: "item-title" %></h3>
+  <%= link_to (image_tag item.image_url), item.url %>
+  <%= link_to '楽天で確認する', item.url %><br />
+  <p>ISBN: <%= item.isbn %></p>
+  <%= form_with url: posts_new_path, local: true do |f| %>
+    <%= f.hidden_field :isbn, value: item.isbn %>
+    <%= f.submit 'save' %>
+  <% end %>
+</div>

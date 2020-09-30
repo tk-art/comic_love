@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row center">
+    <h1 class="api-post">投稿</h1>
+    <div id="search-box">
+      <%= form_with url: search_path, method: :get, local: true do |f| %>
+        <%= f.text_field :keyword, id: "form", class: "form" %>
+        <%= f.submit '漫画を検索', class: "up-btn btn-dark-blue" %>
+      <% end %>
+      <h3>検索結果</h3>
+      <h4 class="center">オススメしたい漫画をひとつ選んでください！</h4>
+      <% if @items.present? %>
+        <%= render partial: 'item', collection: @items %>
+      <% end %>
+    </div>
+  </div>
+</div>

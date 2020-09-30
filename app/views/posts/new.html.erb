@@ -1,0 +1,29 @@
+<% provide(:title, '投稿') %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h2 class="center">投稿</h2>
+      <%= form_with model: @post, url: { controller: 'posts', action: 'create' } do |f| %>
+
+        <%= f.label :isbn, "ISBNコード" %>
+        <%= f.text_field :isbn, value: @isbn, class: 'form', id: 'isbn' %>
+
+        <%= f.label :image, "写真用URL" %>
+        <%= f.url_field :image_url, class: 'form', id: "image" %>
+
+        <%= f.label :title, "漫画タイトル" %>
+        <%= f.text_field :title, class: 'form', id: "title" %>
+
+        <%= f.label :url, '楽天用URL' %>
+        <%= f.url_field :url, class: 'form', id: "url" %>
+
+        <%= f.label :content, "投稿者様のオススメポイント" %>
+        <%= f.text_area :content, class: 'form', id: "content" %>
+
+        <div class="actions">
+          <%= f.submit "投稿する", class: "up-btn btn-dark-blue" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

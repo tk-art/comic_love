@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  get 'relationships/create'
-  get 'relationships/destroy'
-  root to: 'users#home'
-  get 'about', to: 'users#about'
+  root              to: 'users#home'
+  get 'about',      to: 'users#about'
+  get 'search',     to: 'posts#search'
+  post 'posts/new', to: 'posts#isbn'
   devise_for :users, controllers: { registrations: 'users/registrations',
                                     sessions: 'users/sessions' }
   devise_scope :user do
@@ -15,4 +15,5 @@ Rails.application.routes.draw do
     end
   end
   resources :relationships, only: %i[create destroy]
+  resources :posts, only: %i[new create destroy]
 end

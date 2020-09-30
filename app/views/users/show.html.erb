@@ -2,17 +2,29 @@
 <div class="container">
   <div class="row">
     <h3 class="prof">プロフィール</h3>
-    <div class="col-md-4 ">
+    <div class="col-md-4">
       <%= image_tag @image, class: "icon-image", alt: "icon-image" %>
     </div>
     <div class="col-md-8">
-      <%= render 'follow_form', user: @user %>
-      <h4><%= @user.name %></h4>
+      <div class="user_follow">
+        <h4><%= @user.name %></h4>
+        <%= render 'follow_form', user: @user %>
+      </div>
       <div><%= simple_format(@user.profile) %></div>
       <%= render 'shared/stat', user: @user %>
+      <h5>投稿数 : <%= @user.posts.count %></h5>
       <% if @user == current_user %>
         <div><%= link_to 'プロフィールを編集する', edit_user_registration_path %></div>
         <div><%= link_to 'アカウントを削除する', user_registration_path, method: :delete %></div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-4">
+      <% if @user.posts.any? %>
+        <% @posts.each do |p| %>
+          <%= render p %>
+        <% end %>
       <% end %>
     </div>
   </div>

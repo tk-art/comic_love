@@ -53,5 +53,7 @@ ENTRYPOINT [ \
 
 RUN mkdir /comic
 WORKDIR /comic
-COPY . /comic
+COPY  Gemfile /comic/Gemfile
+COPY Gemfile.lock /comic/Gemfile.lock
 RUN bundle install
+COPY . /comic

@@ -17,6 +17,12 @@ Metrics/BlockLength:
 ClassAndModuleChildren:
   EnforcedStyle: compact
 
+GuardClause:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
 AllCops:
   Exclude:
     - 'bin/*'
