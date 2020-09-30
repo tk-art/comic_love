@@ -61,6 +61,7 @@ jobs:
       - run:
           name: Run post-deploy tasks
           command: |
+            heroku git:remote -a $HEROKU_APP_NAME
             heroku run rails db:migrate
 
 orbs:
