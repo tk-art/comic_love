@@ -73,6 +73,7 @@ workflows:
       # - rspec
       - rubocop
       - heroku_deploy:
+          context: BUILD_CIRCLECI
           requires:
             # - rspec
             - rubocop
