@@ -14,9 +14,9 @@ default: &default
   encoding: utf8
   pool: 5
   port: 3306
-  host: mysql
   username: root
-  password: <%= ENV['MYSQL_PASSWORD'] || '' %>
+  password: password
+  host: mysql
 
 
 development:
