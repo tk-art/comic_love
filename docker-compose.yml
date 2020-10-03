@@ -13,7 +13,7 @@ services:
     networks:
       - default
     ports:
-      - '33306:3306'
+      - '3306:3306'
     volumes:
       - mysql_8_0-data:/var/lib/mysql
   web:
@@ -25,7 +25,6 @@ services:
     environment:
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: password
-      MYSQL_HOST: mysql
     depends_on:
       - mysql
     networks:
