@@ -16,7 +16,7 @@ jobs:
             - v1-dependencies-
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
 
-      # - run: bundle exec rails db:create
+      - run: bundle exec rails db:create
       - run: bundle exec rails db:schema:load
       # Rspec
       - run:
