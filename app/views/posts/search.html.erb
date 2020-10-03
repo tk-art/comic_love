@@ -7,7 +7,7 @@
         <%= f.submit '漫画を検索', class: "up-btn btn-dark-blue" %>
       <% end %>
       <h3>検索結果</h3>
-      <h4 class="center">オススメしたい漫画をひとつ選んでください！</h4>
+      <h4 class="center">オススメしたい漫画をひとつ選んでsaveを押してください！</h4>
       <% if @items.present? %>
         <%= render partial: 'item', collection: @items %>
       <% end %>

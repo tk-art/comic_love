@@ -363,9 +363,10 @@ aside {
   padding-bottom: 15px;
   border-bottom: 1px solid darkgray;
   box-shadow: 0 1px 1px lightgray;
+  height: 220px;
   .item-image {
     float: left;
-    margin-right: 20px;
+    margin-right: 30px;
   }
   .text-content {
     .item-url {
@@ -376,4 +377,57 @@ aside {
 
 .mli {
   list-style: none;
+}
+
+.item-image-url {
+  padding-left: 30px;
+}
+
+
+//post
+.post-title {
+  color: black;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.post-point {
+  margin-top: 30px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.balloon{
+  position: relative;
+  padding: 20px;
+  background-color: #a7d5f0;
+  border: 2px solid #8ea1e0;
+  color: $light-gray;
+}
+
+.balloon::before{
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  left: 20px;
+  top: -15px;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid #8ea1e0;
+  border-left: 15px solid transparent;
+}
+
+.balloon::after{
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  left: 20px;
+  top: -12px;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid #a7d5f0;
+  border-left: 15px solid transparent;
 }

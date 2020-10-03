@@ -5,6 +5,10 @@ RSpec.describe User, type: :model do
     let(:user) { create(:user) }
     let(:other_user) { create(:user) }
 
+    it 'validationが全て通れば、有効' do
+      expect(user).to be_valid
+    end
+
     it '名前がなければ、無効' do
       user.name = ''
       expect(user).not_to be_valid

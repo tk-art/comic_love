@@ -1,0 +1,18 @@
+<% provide(:title, 'Post details') %>
+<div class="container">
+  <div class="row">
+    <div class="post-details">
+      <div class="col-md-4">
+        <%= link_to (image_tag(@post.image_url)), @post.url, class: "item-image-url", id: "item-image-url", alt: @post.title %>
+      </div>
+      <div class="col-md-8">
+        <h3><%= @post.title %></h3>
+        <span class="user">投稿者: <%= link_to @post.user.name, @post.user %></span>
+        <h4><%= link_to '楽天で確認する', @post.url, class: "item-url" %></h4>
+        <h4>ISBN: <%= @post.isbn %></h4>
+        <h4 class="post-point">投稿者のオススメポイント！</h4>
+        <h4 class="balloon"><%= @post.content %></h4>
+      </div>
+    </div>
+  </div>
+</div>

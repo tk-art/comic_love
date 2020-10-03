@@ -15,5 +15,5 @@ Rails.application.routes.draw do
     end
   end
   resources :relationships, only: %i[create destroy]
-  resources :posts, only: %i[new create destroy]
+  resources :posts, only: %i[new show create destroy]
 end

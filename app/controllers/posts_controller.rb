@@ -3,32 +3,33 @@ class PostsController < ApplicationController
     @isbn = session[:isbn]
   end
 
+  def isbn
+    if params[:isbn] && params[:isbn].length == 13
+      session[:isbn] = params[:isbn]
+      redirect_to new_post_url
+    end
+  end
+
   def search
     @items = []
-    if params[:keyword]
+    if params[:keyword].present?
       item = RakutenWebService::Books::Book.search({
                                                      title: params[:keyword],
-                                                     hits: 10
+                                                     hits: 20
                                                    })
 
       item.each do |i|
         item = current_user.posts.build(read(i))
         @items << item
       end
-    end
-  end
-
-  def isbn
-    if params[:isbn]
-      session[:isbn] = params[:isbn]
-      redirect_to new_post_url
     else
-      flash[:alert] = '投稿に失敗しました！'
       render 'search'
     end
   end
 
-  def show; end
+  def show
+    @post = current_user.posts.find(params[:id])
+  end
 
   def create
     @post = current_user.posts.build(post_params)
@@ -42,7 +43,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
+    @post = current_user.posts.find(params[:id])
     @post.destroy
     flash[:notice] = '削除が成功しました！'
     redirect_to user_path(current_user)
@@ -57,7 +58,7 @@ class PostsController < ApplicationController
   def read(result)
     title = result['title']
     url   = result['itemUrl']
-    image_url = result['mediumImageUrl']
+    image_url = result['largeImageUrl']
     isbn = result['isbn']
     {
       title: title,
