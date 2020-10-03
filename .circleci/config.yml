@@ -3,7 +3,7 @@ jobs:
   rspec:
     working_directory: ~/comic
     docker:
-      - image: circleci/ruby
+      - image: circleci/ruby:2.5.1
     steps:
       - checkout
       - restore_cache:
