@@ -28,7 +28,16 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = current_user.posts.find(params[:id])
+    @post = Post.find(params[:id])
+    @categories = @post.categories
+    @category = []
+    @categories.each do |categories|
+      related_posts = categories.posts.includes(:post_categories).where.not(id: @post.id)
+      related_posts.each do |category|
+        @category << category
+      end
+    end
+    @category_ary = @category.uniq.shuffle
   end
 
   def create
@@ -52,7 +61,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.permit(:user_id, :content, :isbn, :title, :url, :image_url)
+    params.permit(:user_id, :content, :isbn, :title, :url, :image_url, category_ids: [])
   end
 
   def read(result)

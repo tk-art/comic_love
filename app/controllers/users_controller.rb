@@ -1,7 +1,21 @@
 class UsersController < ApplicationController
-  def home; end
+  def home
+    @categories = Category.page(params[:page])
+    @post = Post.includes(:user).page(params[:page]).order(id: 'ASC').per(10)
+  end
 
   def about; end
+
+  def search
+    @user_or_post = params[:option]
+    if @user_or_post == '1'
+      @users = User.search(params[:search], @user_or_post)
+                   .page(params[:page]).per(10)
+    else
+      @posts = Post.includes(:user).search(params[:search], @user_or_post)
+                   .page(params[:page]).per(10)
+    end
+  end
 
   def index
     @users = User.page(params[:page]).order(id: 'ASC').per(15)
@@ -9,7 +23,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.page(params[:page])
+    @posts = @user.posts.page(params[:page]).order(id: 'ASC').per(10)
     @image = @user.image.url
   end
 

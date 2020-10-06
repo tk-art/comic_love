@@ -23,6 +23,10 @@ GuardClause:
 Metrics/MethodLength:
   Enabled: false
 
+Metrics/AbcSize:
+  Enabled: true
+  Max: 20
+
 AllCops:
   Exclude:
     - 'bin/*'

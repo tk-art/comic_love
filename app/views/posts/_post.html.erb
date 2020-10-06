@@ -1,22 +1,19 @@
-<div class="container">
-  <div class="row">
-    <li class="mli micropost-<%= post.id %>">
-    　<div class="content">
-        <div class="text-content">
-          <%= link_to (image_tag(post.image_url)), post.url, class: "item-image", alt: post.title %>
-          <h3><%= link_to post.title, post_path(post.id), class: "post-title" %></h3>
-          <span class="user">投稿者: <%= link_to post.user.name, post.user %></span>
-          <h4><%= link_to '楽天で確認する', post.url, class: "item-url" %></h4>
-          <h4>ISBN: <%= post.isbn %></h4>
-          <span class="timestamp">　
-            <%= time_ago_in_words(post.created_at) %> 前に投稿　
-            <% if current_user?(post.user) %>
-              <%= link_to "削除", post, method: :delete,
-                                  data: { confirm: "削除してもよろしいですか？" } %>
-            <% end %>
-          </span>
-        </div>
-      </div>
-    </li>
+<li class="mli">
+　<div class="content">
+    <div class="text-content">
+      <%= link_to (image_tag(post.image_url)), post.url, class: "item-image", alt: post.title %>
+      <h3><%= link_to post.title, post_path(post.id), class: "post-title" %></h3>
+      <span class="user">投稿者: <%= link_to post.user.name, post.user %></span>
+      <h4><%= link_to '楽天で確認する', post.url, class: "item-url" %></h4>
+      <h4>ISBN: <%= post.isbn %></h4>
+      <h5><%= @category %></h5>
+      <span class="timestamp">　
+        <%= time_ago_in_words(post.created_at) %> 前に投稿　
+        <% if current_user?(post.user) %>
+          <%= link_to "削除", post, method: :delete,
+                              data: { confirm: "削除してもよろしいですか？" } %>
+        <% end %>
+      </span>
+    </div>
   </div>
-</div>
+</li>

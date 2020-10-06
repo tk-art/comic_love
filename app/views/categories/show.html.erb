@@ -1,7 +1,7 @@
-<% provide(:title, 'Home') %>
+<% provide(:title, 'Category') %>
 <div class="container">
   <div class="row">
-    <div class="col-md-4 ">
+    <div class="col-md-4">
       <ul>
         <li class="table-tr center">
           <% @categories.each do |category| %>
@@ -11,11 +11,10 @@
       </ul>
     </div>
     <div class="col-md-8">
-      <h2>みんなのオススメ漫画！</h2>
-      <% @post.each do |p| %>
-        <%= render p %>
+      <h2>カテゴリー（<%= @categories_show.name %>)</h2>
+      <% @category.each do |category|%>
+        <%= render 'categories', category: category %>
       <% end %>
-      <%= paginate @post %>
     </div>
   </div>
 </div>

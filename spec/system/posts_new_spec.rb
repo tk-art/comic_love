@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Post', type: :system do
-  let(:user) { create(:user) }
-  let(:post) { create(:post) }
+  let(:user)     { create(:user) }
+  let(:post)     { create(:post) }
+  let!(:category) { create(:category) }
 
   before do
     sign_in(user.email, user.password)
@@ -17,6 +18,7 @@ RSpec.describe 'Post', type: :system do
         fill_in 'title',     with: post.title
         fill_in 'url',       with: post.url
         fill_in 'content',   with: post.content
+        check category.name
         find('#new-post').click
       end
 

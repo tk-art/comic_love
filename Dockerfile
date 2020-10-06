@@ -2,6 +2,7 @@
 FROM ruby:2.5.1-stretch
 
 ENV ENTRYKIT_VERSION 0.4.0
+ENV LANG C.UTF-8
 
 RUN apt-get update                                                                                                                      \
   && apt-get install                                                                                                                    \

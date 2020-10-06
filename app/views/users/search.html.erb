@@ -1,0 +1,30 @@
+<% provide(:title, 'Search') %>
+<div class="container">
+  <div class="row">
+    <%= form_tag searching_path, class: "search-form" do %>
+      <%= select_tag :option, options_for_select([["ユーザー名", "1"],["漫画タイトル","2"]]), class: "select-search" %>
+      <%= text_field_tag :search, '', placeholder: 'ユーザー名か漫画タイトル選択後、検索してください！', class: 'form', id: 'form' %>
+      <%= submit_tag '検索する', class: 'up-btn btn-dark-blue' %>
+    <% end %>
+
+    <% if @user_or_post == "1"%>
+      <h2 class="center">検索結果</h2>
+      <div class="users">
+        <% @users.each do |user| %>
+          <li>
+            <%= image_tag user.image.url, class: "icon3", alt: "icon-image" %>
+            <%= link_to user.name, user, class: "search-user-name" %>
+          </li>
+        <% end %>
+        <%= paginate @users %>
+      </div>
+    <% elsif @user_or_post == "2" %>
+      <h2 class="center">検索結果</h2>
+      <% @posts.each do |post| %>
+        <%= render 'posts/post', post: post %>
+      <% end %>
+      <%= paginate @posts %>
+    <% else %>
+    <% end %>
+  </div>
+</div>

@@ -5,9 +5,9 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "COMIC SHAREとは？", about_path %></li>
         <% if user_signed_in? %>
-          <li><%= link_to "投稿する", search_path %>
+          <li><%= link_to "投稿する", search_path %></li>
           <li><%= link_to "通知", "#" %></li>
-          <li><%= link_to "お気に入り", "#" %></li>
+          <li><%= link_to "検索する", searching_path %></li>
           <li class="dropdown">
             <a href="#", class="dropdown-toggle" data-toggle="dropdown">
               My Page<b class="caret"></b>

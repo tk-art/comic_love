@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'users validates' do
-    let(:user) { create(:user) }
-    let(:other_user) { create(:user) }
+    let(:user)        { create(:user) }
+    let(:other_user)  { create(:user) }
+    let(:user_search) { User.search(other_user.name, 1) }
 
     it 'validationが全て通れば、有効' do
       expect(user).to be_valid
@@ -39,6 +40,24 @@ RSpec.describe User, type: :model do
     it 'プロフィールは, 140文字以内でなければ無効' do
       user.profile = 'a' * 141
       expect(user).not_to be_valid
+    end
+
+    it '他のユーザーをフォローすることができる' do
+      user.follow(other_user)
+      expect(user.following?(other_user)).to be_truthy
+    end
+
+    it '他のユーザーをフォロー解除することができる' do
+      user.follow(other_user)
+      expect(user.following.count).to eq 1
+      user.unfollow(other_user)
+      expect(user.following.count).to eq 0
+    end
+
+    it 'user検索ができる' do
+      user_search.each do |user|
+        expect(user.name).to eq other_user.name
+      end
     end
   end
 end

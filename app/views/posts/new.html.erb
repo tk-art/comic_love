@@ -20,6 +20,15 @@
         <%= f.label :content, "投稿者様のオススメポイント" %>
         <%= f.text_area :content, class: 'form', id: "content" %>
 
+        <div class="category-form">
+          <%= f.label :category, 'カテゴリー選択（一つ以上）' %><br />
+          <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
+            <%= category.label do %>
+              <%= category.check_box %>
+              <p class="category-check"><%= category.text %></p>
+            <% end %>
+          <% end %>
+        </div>
         <div class="actions">
           <%= f.submit "投稿する", class: "up-btn btn-dark-blue", id: 'new-post' %>
         </div>

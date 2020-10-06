@@ -25,6 +25,7 @@
         <% @posts.each do |p| %>
           <%= render p %>
         <% end %>
+        <%= paginate @posts %>
       <% end %>
     </div>
   </div>
