@@ -71,10 +71,10 @@ workflows:
   version: 2.1
   build:
     jobs:
-      - rspec
+      # - rspec
       - rubocop
       - heroku_deploy:
           context: BUILD_CIRCLECI
           requires:
-            - rspec
+            # - rspec
             - rubocop
