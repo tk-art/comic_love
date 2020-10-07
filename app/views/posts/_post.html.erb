@@ -6,10 +6,10 @@
       <span class="user">投稿者: <%= link_to post.user.name, post.user %></span>
       <h4><%= link_to '楽天で確認する', post.url, class: "item-url" %></h4>
       <h4>ISBN: <%= post.isbn %></h4>
-      <h5><%= @category %></h5>
       <span class="timestamp">　
         <%= time_ago_in_words(post.created_at) %> 前に投稿　
         <% if current_user?(post.user) %>
+          <%= link_to '編集', edit_post_path(post.id) %>
           <%= link_to "削除", post, method: :delete,
                               data: { confirm: "削除してもよろしいですか？" } %>
         <% end %>

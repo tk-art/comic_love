@@ -7,11 +7,7 @@
       <h4><%= link_to '楽天で確認する', category.url, class: "item-url" %></h4>
       <h4>ISBN: <%= category.isbn %></h4>
       <span class="timestamp">　
-        <%= time_ago_in_words(category.created_at) %> 前に投稿　
-        <% if current_user?(category.user) %>
-          <%= link_to "削除", category, method: :delete,
-                              data: { confirm: "削除してもよろしいですか？" } %>
-        <% end %>
+        <%= time_ago_in_words(category.created_at) %> 前に投稿
       </span>
     </div>
   </div>

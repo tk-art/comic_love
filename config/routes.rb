@@ -16,7 +16,11 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
+
+  resources :posts, only: %i[new show edit update create destroy] do
+    resources :comments, only: %i[create]
+  end
+
   resources :relationships, only: %i[create destroy]
-  resources :posts,         only: %i[new show create destroy]
   resources :categories,    only: %i[show]
 end

@@ -6,44 +6,51 @@ FactoryBot.define do
     password_confirmation { 'foobar' }
     image { File.open('./spec/fixtures/files/default.jpg', 'r') }
     profile { 'はじめたばかりなので、宜しく' }
+    # after(:create) do |user|
+
+    # end
   end
 
   factory :post do
-    user_id { user.id.to_s }
-    title { '『グラップラー刃牙』はBLではないかと1日30時間300日考えた乙女の記録ッッ' }
+    user_id { 1 }
+    sequence(:title) { |t| "title_#{t}" }
     image_url { 'https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8439/9784309028439.jpg?_ex=200x200' }
     url { 'https://books.rakuten.co.jp/rb/16091894/' }
     isbn { '9784309028439' }
     content { '面白い！' }
     association :user
     after(:create) do |post|
-      category = build(:category)
-      category1 = build(:category1)
-      post.post_categories << build(:post_category, post: post, category: category)
-      post.post_categories << build(:post_category, post: create(:post1), category: category1)
+      create(:post_category, post: post, category: create(:category))
+      create(:comment, user: create(:user), post: post)
     end
   end
 
-  factory :post1, class: Post do
-    user_id { user.id.to_s }
-    title { '慎重勇者' }
-    image_url { 'https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0075/9784040640075.jpg?_ex=200x200' }
-    url { 'https://books.rakuten.co.jp/rb/16091894/' }
-    isbn { '9784309028439' }
-    content { '面白い！' }
-    association :user
-  end
-
   factory :category do
-    name { 'ファンタジー' }
-  end
-
-  factory :category1, class: Category do
-    name { 'ギャグ' }
+    sequence(:name) { |n| "ファンタジー#{n}" }
   end
 
   factory :post_category do
     post
     category
   end
+
+  factory :comment do
+    user
+    post
+    content { '最高に面白い' }
+  end
+
+  # factory :post do
+  #   user_id { user.id.to_s }
+  #   title { '『グラップラー刃牙』はBLではないかと1日30時間300日考えた乙女の記録ッッ' }
+  #   image_url { 'https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8439/9784309028439.jpg?_ex=200x200' }
+  #   url { 'https://books.rakuten.co.jp/rb/16091894/' }
+  #   isbn { '9784309028439' }
+  #   content { '面白い！' }
+  #   association :user
+  #   after(:create) do |post|
+  #     category = build(:category)
+  #     post.post_categories << build(:post_category, post: post, category: category)
+  #   end
+  # end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   describe 'post validation' do
-    let(:post)        { create(:post1) }
+    let!(:post) { create(:post) }
     let(:post_search) { Post.search(post.title, 2) }
 
     it 'validationが全て通れば有効' do

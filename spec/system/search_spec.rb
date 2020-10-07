@@ -46,8 +46,8 @@ RSpec.describe 'Search', type: :system do
 
     context '漫画タイトルで検索する場合', js: true do
       let(:post)        { create(:post) }
-      let(:post1)       { create(:post1) }
-      let!(:malti_post) { create_list(:post, 11) }
+      let(:post1)       { create(:post) }
+      let!(:malti_post) { create_list(:post, 11, title: 'takumi') }
 
       it '検索すると、一致した投稿が表示される' do
         find('.select-search').click
@@ -64,7 +64,7 @@ RSpec.describe 'Search', type: :system do
       it '10以上投稿がヒットすれば、ページネーションが表示される' do
         find('.select-search').click
         find('option', text: '漫画タイトル').click
-        fill_in 'search', with: post.title
+        fill_in 'search', with: 'takumi'
         within '.search-form' do
           click_on '検索する'
         end

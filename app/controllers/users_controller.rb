@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def home
     @categories = Category.page(params[:page])
-    @post = Post.includes(:user).page(params[:page]).order(id: 'ASC').per(10)
+    @post = Post.includes(:user).page(params[:page]).order(created_at: 'DESC').per(10)
   end
 
   def about; end
@@ -18,12 +18,12 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.page(params[:page]).order(id: 'ASC').per(15)
+    @users = User.page(params[:page]).order(id: 'DESC').per(15)
   end
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.page(params[:page]).order(id: 'ASC').per(10)
+    @posts = @user.posts.page(params[:page]).order(created_at: 'DESC').per(10)
     @image = @user.image.url
   end
 

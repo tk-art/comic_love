@@ -47,6 +47,8 @@ RUN apt-get update                                                              
 
 ENTRYPOINT [ \
   "prehook", "bundle install -j3 --path vendor/bundle", "--", \
+  "prehook", "bundle exec rails init_db:setup", "--", \
+  "switch", "reset=bundle exec rails init_db:reset", "--", \
   "prehook", "bundle exec rspec -b spec", "--", \
   "prehook", "ruby -v", "--", \
   "prehook", "node -v", "--" \

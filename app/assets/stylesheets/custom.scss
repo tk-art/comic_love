@@ -415,6 +415,7 @@ aside {
 .balloon{
   position: relative;
   padding: 20px;
+  margin-bottom: 25px;
   background-color: #a7d5f0;
   border: 2px solid #8ea1e0;
   color: $light-gray;
@@ -444,6 +445,29 @@ aside {
   border-right: 15px solid transparent;
   border-bottom: 15px solid #a7d5f0;
   border-left: 15px solid transparent;
+}
+
+//comment
+
+.border-top {
+  p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid darkgray;
+    box-shadow: 0 1px 1px lightgray;
+  }
+}
+.comments {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 200px;
+  overflow: scroll;
+  p {
+    width: 700px;
+    word-wrap: break-word;
+    padding-left: 10px;
+  }
 }
 
 //category
@@ -489,11 +513,12 @@ aside {
     border-bottom: 1px solid darkgray;
     box-shadow: 0 1px  $light-gray;
   }
-
   .category-post {
     img {
       padding: 20px 60px;
       height: 250px;
+      border: 1px solid lightgray;
+      border-radius: 5px;
     }
   }
 }

@@ -4,7 +4,7 @@ RSpec.describe 'Category', type: :system do
   describe 'Category function' do
     let(:user)    { create(:user) }
     let!(:post)   { create(:post) }
-    let!(:post1)  { create(:post1) }
+    let!(:post1)  { create(:post) }
 
     before do
       sign_in(user.email, user.password)
@@ -16,8 +16,8 @@ RSpec.describe 'Category', type: :system do
     end
 
     it 'カテゴリーリンクを踏むと、そのカテゴリーに属する投稿がでる' do
-      expect(page).to have_content 'ファンタジー'
-      click_on 'ファンタジー'
+      expect(page).to have_content post.title
+      click_on post.title
       expect(page).to have_content post.title
       expect(page).not_to have_content post1.title
     end

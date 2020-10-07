@@ -1,11 +1,11 @@
-<% provide(:title, '投稿') %>
+<% provide(:title, 'Post Edit') %>
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <h2 class="center">投稿</h2>
-      <%= form_with model: @post, url: { controller: 'posts', action: 'create' } do |f| %>
+      <h2 class="center">編集</h2>
+      <%= form_with model: @post, local: true do |f| %>
         <%= f.label :isbn, "ISBNコード" %>
-        <%= f.text_field :isbn, value: @isbn, class: 'form', id: 'isbn' %>
+        <%= f.text_field :isbn, class: 'form', id: 'isbn' %>
 
         <%= f.label :image, "写真用URL" %>
         <%= f.url_field :image_url, class: 'form', id: "image" %>
@@ -30,7 +30,7 @@
         </div>
 
         <div class="actions">
-          <%= f.submit "投稿する", class: "up-btn btn-dark-blue", id: 'new-post' %>
+          <%= f.submit "編集する", class: "up-btn btn-dark-blue", id: 'new-post' %>
         </div>
       <% end %>
     </div>

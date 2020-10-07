@@ -1,15 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe 'Post', type: :system do
-  let(:user)     { create(:user) }
-  let(:post)     { create(:post) }
-  let!(:category) { create(:category) }
+  let(:user) { create(:user) }
+  let(:post) { create(:post) }
 
   before do
     sign_in(user.email, user.password)
   end
 
-  describe 'new page' do
+  describe 'new edit' do
     context '全てのフォームに値が正常に存在している場合' do
       before do
         visit new_post_path
@@ -18,7 +17,6 @@ RSpec.describe 'Post', type: :system do
         fill_in 'title',     with: post.title
         fill_in 'url',       with: post.url
         fill_in 'content',   with: post.content
-        check category.name
         find('#new-post').click
       end
 
@@ -37,6 +35,18 @@ RSpec.describe 'Post', type: :system do
         expect(page).not_to have_content post.title
         expect(page).to have_content '削除が成功しました！'
       end
+
+      it '投稿を編集することができる' do
+        expect(page).to have_content post.title
+        within first('.text-content') do
+          expect(page).to have_content '編集'
+          click_on '編集'
+        end
+        fill_in 'content', with: '最高に面白い'
+        click_on '編集する'
+        expect(current_path).to eq user_path(user)
+        expect(page).to have_content '投稿の編集に成功しました！'
+      end
     end
 
     describe 'new page form', js: true do
@@ -54,7 +64,7 @@ RSpec.describe 'Post', type: :system do
         expect(page).to have_css '#isbn'
         expect(find('#isbn').value).to eq '9784309028439'
         expect(page).to have_field '写真用URL', with: post.image_url
-        expect(page).to have_field '漫画タイトル', with: post.title
+        expect(page).to have_field '漫画タイトル', with: '『グラップラー刃牙』はBLではないかと1日30時間300日考えた乙女の記録ッッ'
         expect(page).to have_field '楽天用URL', with: post.url
         expect(page).to have_field '投稿者様のオススメポイント', with: ''
       end

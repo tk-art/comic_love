@@ -1,7 +1,6 @@
 version: "3"
 volumes:
   mysql_8_0-data:
-  my_cnf:
   vendor_bundle_2_5_1:
   vendor_assets_2_7:
   node_modules:
@@ -18,7 +17,7 @@ services:
       - '3306:3306'
     volumes:
       - mysql_8_0-data:/var/lib/mysql
-      - my_cnf:/etc/mysql/my.cnf
+
   web:
     build:
       context: .

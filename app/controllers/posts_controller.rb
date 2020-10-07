@@ -38,13 +38,30 @@ class PostsController < ApplicationController
       end
     end
     @category_ary = @category.uniq.shuffle
+    @comments = @post.comments.includes(:user).order(created_at: 'DESC')
+    @comment = current_user.comments.build
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params1)
+      flash[:notice] = '投稿の編集に成功しました！'
+      redirect_to current_user
+    else
+      flash[:alert] = '投稿の編集に失敗しました！'
+      render 'edit'
+    end
   end
 
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
       flash[:notice] = '投稿に成功しました！'
-      redirect_to user_url(current_user)
+      redirect_to user_path(current_user)
     else
       flash[:alert] = '投稿に失敗しました！'
       render 'new'
@@ -53,8 +70,11 @@ class PostsController < ApplicationController
 
   def destroy
     @post = current_user.posts.find(params[:id])
-    @post.destroy
-    flash[:notice] = '削除が成功しました！'
+    if @post.destroy
+      flash[:notice] = '削除が成功しました！'
+    else
+      flash[:alert] = '削除に失敗しました！'
+    end
     redirect_to user_path(current_user)
   end
 
@@ -62,6 +82,10 @@ class PostsController < ApplicationController
 
   def post_params
     params.permit(:user_id, :content, :isbn, :title, :url, :image_url, category_ids: [])
+  end
+
+  def post_params1
+    params.require(:post).permit(:user_id, :content, :isbn, :title, :url, :image_url, category_ids: [])
   end
 
   def read(result)
