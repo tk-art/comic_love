@@ -9,6 +9,6 @@ class NotificationsController < ApplicationController
 
   def destroy
     @notifications = current_user.opponent_notifications.destroy_all
-    redirect_to user_path(current_user)
+    redirect_back(fallback_location: root_path)
   end
 end

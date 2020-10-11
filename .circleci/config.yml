@@ -1,28 +1,27 @@
 version: 2.1
 jobs:
-  # rspec:
-  #   docker:
-  #     - image: circleci/ruby:2.5.1
-  #     - image: circleci/mysql:8.0
-  #   working_directory: ~/comic
-  #   steps:
-  #     - checkout
-  #     - restore_cache:
-  #         keys:
-  #           - v1-dependencies-{{ checksum "Gemfile.lock" }}
-  #           - v1-dependencies-
-  #     - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
-  #     - save_cache:
-  #       paths:
-  #         - ./vendor/bundle
-  #       key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
-  #     - run: bundle exec rails db:create
-  #     - run: bundle exec rails db:schema:load
-  #     # Rspec
-  #     - run:
-  #         name: Rspec
-  #         command: bundle exec Rspec
+  rspec:
+    docker:
+      - image: circleci/ruby:2.5.1
+      - image: circleci/mysql:8.0
+    working_directory: ~/comic
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+        paths:
+          - ./vendor/bundle
+        key: v1-dependencies-{{ checksum "Gemfile.lock" }
+      - run: bundle exec rails db:create
+      - run: bundle exec rails db:schema:load
+      # Rspec
+      - run:
+          name: Rspec
+          command: bundle exec rspec
 
   rubocop:
     working_directory: ~/comic
@@ -71,10 +70,10 @@ workflows:
   version: 2.1
   build:
     jobs:
-      # - rspec
+      - rspec
       - rubocop
       - heroku_deploy:
           context: BUILD_CIRCLECI
           requires:
-            # - rspec
+            - rspec
             - rubocop

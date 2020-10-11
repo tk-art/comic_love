@@ -14,6 +14,22 @@ RSpec.describe 'Follow, Unfollow', type: :system do
     malory.follow(michael)
   end
 
+  describe 'Feed' do
+    let!(:post1) { create(:post, user_id: michael.id) }
+    let!(:post2) { create(:post, user_id: archer.id) }
+    let!(:post3) { create(:post, user_id: lana.id) }
+    let!(:post4) { create(:post, user_id: malory.id) }
+
+    it 'フォローしているユーザーの投稿だけを取ってくる' do
+      visit root_path
+      expect(page).to have_css '.mli', count: 3
+      expect(page).to have_link michael.name
+      expect(page).to have_link archer.name
+      expect(page).to have_link lana.name
+      expect(page).not_to have_link malory.name
+    end
+  end
+
   describe 'follow unfollow btn' do
     context '自分以外のプロフィールページ' do
       it 'フォローボタンが表示されている' do

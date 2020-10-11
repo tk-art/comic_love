@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def home
     @categories = Category.page(params[:page])
-    @post = Post.includes(:user).page(params[:page]).order(created_at: 'DESC').per(10)
+    @post = current_user.feed.includes(:user).page(params[:page]).order(created_at: 'DESC').per(10)
   end
 
   def about; end
