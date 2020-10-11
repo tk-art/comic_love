@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   rspec:
-    working_directory: ~/potepanec
+    working_directory: ~/comic
     docker:
       - image: circleci/ruby
     steps:

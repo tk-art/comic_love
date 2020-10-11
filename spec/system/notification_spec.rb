@@ -5,11 +5,11 @@ RSpec.describe 'Notification' do
     let(:user) { create(:user) }
     let(:user1) { create(:user) }
     let!(:post) { create(:post, user_id: user.id) }
-    let(:comment) { Comment.create(user_id: user1.id, post_id: post.id, content: "コメントテスト")}
-    let!(:notification) {
+    let(:comment) { Comment.create(user_id: user1.id, post_id: post.id, content: 'コメントテスト') }
+    let!(:notification) do
       Notification.create(visitor_id: user1.id, visited_id: user.id, post_id: post.id,
-                                                comment_id: comment.id, action: "comment")
-    }
+                          comment_id: comment.id, action: 'comment')
+    end
 
     before do
       sign_in(user1.email, user1.password)
@@ -41,7 +41,7 @@ RSpec.describe 'Notification' do
       it 'commentされたら、通知を受け取る' do
         click_on '通知'
         expect(page).to have_content "#{user1.name}さんが あなたの投稿にコメントしました"
-        expect(page).to have_content "コメントテスト"
+        expect(page).to have_content 'コメントテスト'
       end
 
       it '通知未確認であれば、リンク側にマークがでる' do
