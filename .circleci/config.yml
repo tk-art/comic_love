@@ -3,7 +3,7 @@ jobs:
   rspec:
     working_directory: ~/comic
     docker:
-      - image: circleci/ruby
+      - image: circleci/ruby:2.5.1
     steps:
       - checkout
       - setup_remote_docker
@@ -15,7 +15,7 @@ jobs:
           name: Start containers and verify it is working
           command: |
             set -x
-            docker-compose up -d
+            docker-compose up
       - run:
           name: Setup database
           command: |
