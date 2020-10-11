@@ -15,7 +15,10 @@
       <h5>投稿数 : <%= @user.posts.count %></h5>
       <% if @user == current_user %>
         <div><%= link_to 'プロフィールを編集する', edit_user_registration_path %></div>
-        <div><%= link_to 'アカウントを削除する', user_registration_path, method: :delete %></div>
+        <div>
+          <%= link_to 'アカウントを削除する', user_registration_path, method: :delete,
+                                              data: { confirm: "削除してもよろしいですか？" } %>
+        </div>
       <% end %>
     </div>
   </div>

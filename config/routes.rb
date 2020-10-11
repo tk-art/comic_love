@@ -23,4 +23,5 @@ Rails.application.routes.draw do
 
   resources :relationships, only: %i[create destroy]
   resources :categories,    only: %i[show]
+  resources :notifications, only: %i[index destroy]
 end

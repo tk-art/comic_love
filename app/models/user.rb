@@ -14,6 +14,12 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships
   has_many :comments
+  has_many :myself_notifications, class_name: 'Notification',
+                                  foreign_key: 'visitor_id',
+                                  dependent: :destroy
+  has_many :opponent_notifications, class_name: 'Notification',
+                                    foreign_key: 'visited_id',
+                                    dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 30 }
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true, allow_blank: true
@@ -37,6 +43,17 @@ class User < ApplicationRecord
       where(['name LIKE ?', "%#{search}%"])
     else
       all
+    end
+  end
+
+  def create_notification_follow!(current_user)
+    temp = Notification.where(['visitor_id = ? and visited_id = ? and action = ? ', current_user.id, id, 'follow'])
+    if temp.blank?
+      notification = current_user.myself_notifications.build(
+        visited_id: id,
+        action: 'follow'
+      )
+      notification.save if notification.valid?
     end
   end
 end

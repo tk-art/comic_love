@@ -1,0 +1,16 @@
+<% provide(:title, 'Notification') %>
+<div class="container">
+  <div class="row">
+    <h1 class="center">通知一覧</h1>
+    <div class="notification">
+      <% if @notifications.present? %>
+        <%= link_to '全件削除', notification_path(@notifications), method: :delete,
+                                   data: { confirm: "削除してもよろしいですか？" } %>
+        <%= render @notifications %>
+        <%= paginate @notifications %>
+      <% else %>
+          <p>通知がありません</p>
+      <% end %>
+      </div>
+  </div>
+</div>

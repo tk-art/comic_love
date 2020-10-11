@@ -6,8 +6,8 @@
         <%= link_to (image_tag(@post.image_url)), @post.url, class: "item-image-url", id: "item-image-url", alt: @post.title %>
       </div>
       <div class="col-md-8">
-        <% @categories.each do |categories| %>
-          <h5 class="category-name center"><%= categories.name %></h5>
+        <% @categories.each do |category| %>
+          <h5 class="category-name center"><%= link_to category.name, category_path(category.id) %></h5>
         <% end %>
         <h3><%= @post.title %></h3>
         <span class="user">投稿者: <%= link_to @post.user.name, @post.user %></span>
@@ -15,22 +15,7 @@
         <h4>ISBN: <%= @post.isbn %></h4>
         <h4 class="post-point">投稿者のオススメポイント！</h4>
         <h4 class="balloon"><%= simple_format(@post.content) %></h4>
-        <div class="border-top mb-10">
-          <p class="mt-5">コメント一覧</p>
-          <div class="comments">
-            <% @comments.each do |c| %>
-              <h5><%= link_to c.user.name, user_path(c.user_id) %></h5>
-              <p><%= c.content %></p>
-            <% end %>
-          </div>
-          <%= form_with model: [@post, @comment] do |f| %>
-            <%= f.text_area :content, id: "comment-form", class: "form" %>
-            <%= f.hidden_field :post_id, value: @post.id %>
-            <%= button_tag type: "submit", class: "btn btn-success float-right mt-1" do %>
-              <i class="far fa-comments"></i> コメントする
-            <% end %>
-          <% end %>
-        </div>
+        <%= render 'post_comments', comments: @comments, post: @post, comment: @comment %>
       </div>
     </div>
   </div>
@@ -40,10 +25,10 @@
       <div class="category-posts">
         <% @category_ary.each do |c| %>
           <% if @category_ary.count <= 4 %>
-            <%= link_to (image_tag(c.image_url)), post_path(c.id), class: "category-post" %>
+            <%= link_to (image_tag(c.image_url)), post_path(c.id), class: "category-post", alt: c.title %>
           <% else %>
             <% @category_ary.slice!(4..100) %>
-            <%= link_to (image_tag(c.image_url)), post_path(c.id), class: "category-post" %>
+            <%= link_to (image_tag(c.image_url)), post_path(c.id), class: "category-post", alt: c.title %>
           <% end %>
         <% end %>
       </div>

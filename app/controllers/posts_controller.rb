@@ -31,10 +31,10 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @categories = @post.categories
     @category = []
-    @categories.each do |categories|
-      related_posts = categories.posts.includes(:post_categories).where.not(id: @post.id)
-      related_posts.each do |category|
-        @category << category
+    @categories.each do |category|
+      related_posts = category.posts.where.not(id: @post.id)
+      related_posts.each do |posts|
+        @category << posts
       end
     end
     @category_ary = @category.uniq.shuffle

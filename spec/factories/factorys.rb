@@ -6,13 +6,9 @@ FactoryBot.define do
     password_confirmation { 'foobar' }
     image { File.open('./spec/fixtures/files/default.jpg', 'r') }
     profile { 'はじめたばかりなので、宜しく' }
-    # after(:create) do |user|
-
-    # end
   end
 
   factory :post do
-    user_id { 1 }
     sequence(:title) { |t| "title_#{t}" }
     image_url { 'https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8439/9784309028439.jpg?_ex=200x200' }
     url { 'https://books.rakuten.co.jp/rb/16091894/' }
@@ -20,13 +16,15 @@ FactoryBot.define do
     content { '面白い！' }
     association :user
     after(:create) do |post|
-      create(:post_category, post: post, category: create(:category))
       create(:comment, user: create(:user), post: post)
     end
   end
 
   factory :category do
-    sequence(:name) { |n| "ファンタジー#{n}" }
+    name { 'ファンタジー' }
+    trait :category1 do
+      name { 'ギャグ' }
+    end
   end
 
   factory :post_category do

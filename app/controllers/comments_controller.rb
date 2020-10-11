@@ -1,13 +1,18 @@
 class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.build(comment_params)
-    @comment.save
-    redirect_back(fallback_location: root_path)
+    @post = @comment.post
+    if @comment.save
+      @post.create_notification_comment!(current_user, @comment.id)
+      redirect_back(fallback_location: root_path)
+    else
+      render 'posts/show'
+    end
   end
 
   private
 
   def comment_params
-    params.require(:comment).permit(:post_id, :content)
+    params.require(:comment).permit(:user_id, :post_id, :content)
   end
 end

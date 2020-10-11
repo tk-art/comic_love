@@ -1,31 +1,40 @@
-<div class="navbar navbar-fixed-top navbar-light nav-height">
+<div id="header" class="navbar navbar-fixed-top navbar-light  nav-height">
   <div class="container">
-    <nav>
-      <%= link_to "COMIC SHARE", root_path, id: "logo" %>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "COMIC SHAREとは？", about_path %></li>
-        <% if user_signed_in? %>
-          <li><%= link_to "投稿する", search_path %></li>
-          <li><%= link_to "通知", "#" %></li>
-          <li><%= link_to "検索する", searching_path %></li>
-          <li class="dropdown">
-            <a href="#", class="dropdown-toggle" data-toggle="dropdown">
-              My Page<b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "プロフィール", user_path(current_user.id), class: "d-item" %></li>
-              <li><%= link_to "ユーザー",  users_path, class: "d-item" %></li>
-              <li class="divider"></li>
-              <li>
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "d-item" %>
-              </li>
-            </ul>
-          </li>
-        <% else %>
-          <li><%= link_to "新規登録", new_user_registration_path %></li>
-          <li><%= link_to "ログイン", new_user_session_path %></li>
-        <% end %>
-      </ul>
-    </nav>
+    <%= link_to "COMIC SHARE", root_path, id: "logo" %>
+    <ul id="navi", class="nav navbar-nav navbar-right">
+      <li><%= link_to "COMIC SHAREとは？", about_path %></li>
+      <% if user_signed_in? %>
+        <li><%= link_to "投稿する", search_path %></li>
+        <li class="notification-icon">
+          <%= link_to "通知", notifications_path %>
+            <% if unchecked_notifications.any? %>
+              <i class="fas fa-circle n-circle"></i>
+            <% end %>
+        </li>
+        <li><%= link_to "検索する", searching_path %></li>
+        <li class="dropdown">
+          <a href="#", class="dropdown-toggle" data-toggle="dropdown">
+            My Page<b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "プロフィール", user_path(current_user.id), class: "d-item" %></li>
+            <li><%= link_to "ユーザー",  users_path, class: "d-item" %></li>
+            <li class="divider"></li>
+            <li>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "d-item" %>
+            </li>
+          </ul>
+        </li>
+      <% else %>
+        <li><%= link_to "新規登録", new_user_registration_path %></li>
+        <li><%= link_to "ログイン", new_user_session_path %></li>
+      <% end %>
+    </ul>
+    <div class="nav_btn" id="nav_btn">
+      <span class="hamburger_line hamburger_line1"></span>
+      <span class="hamburger_line hamburger_line2"></span>
+      <span class="hamburger_line hamburger_line3"></span>
+    </div>
+    <div class="nav_bg" id="nav_bg"></div>
   </div>
 </div>
