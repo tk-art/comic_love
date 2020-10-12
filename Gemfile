@@ -32,6 +32,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'bootstrap-sass', '3.4.1'
 gem 'carrierwave'
+gem 'dotenv-rails'
 gem 'faker'
 gem 'fog'
 gem 'font-awesome-sass'

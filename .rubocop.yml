@@ -28,6 +28,9 @@ Metrics/AbcSize:
   Max: 25
 
 AllCops:
+  NewCops: disable
+
+AllCops:
   Exclude:
     - 'bin/*'
     - 'config/environments/*'

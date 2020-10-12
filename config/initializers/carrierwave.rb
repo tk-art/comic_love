@@ -1,5 +1,6 @@
 unless Rails.env.development? || Rails.env.test?
   CarrierWave.configure do |config|
+    config.fog_provider = 'fog/aws'
     config.fog_credentials = {
       provider: 'AWS',
       aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
@@ -7,7 +8,10 @@ unless Rails.env.development? || Rails.env.test?
       region: ENV['S3_REGION']
     }
 
-    config.fog_directory  = ENV['S3_BUCKET']
-    config.cache_storage = :fog
+    config.storage :fog
+    config.fog_public = false
+    config.fog_directory  = 'comicshare'
+    config.asset_host = 'https://comicshare.s3.amazonaws.com'
+    config.fog_attributes = { 'Cache-Control' => "max-age=#{365.day.to_i}" }
   end
 end
