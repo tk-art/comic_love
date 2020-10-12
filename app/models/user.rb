@@ -24,8 +24,6 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 30 }
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true, allow_blank: true
   validates :profile, length: { maximum: 140 }
-  validates :image,   content_type: { in: %w[image/jpeg image/gif image/png],
-                                      message: '有効な画像形式ではありません' }
   mount_uploader :image, ImageUploader
 
   def self.guest
