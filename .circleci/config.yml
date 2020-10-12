@@ -1,37 +1,34 @@
 version: 2.1
 jobs:
-  rspec:
-    working_directory: ~/comic
-    docker:
-      - image: circleci/ruby:2.5.1
-        environment:
-          RAILS_ENV: test
-    steps:
-      - checkout
-      - restore_cache:
-        keys:
-          - gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          - gem-cache-{{ arch }}-{{ .Branch }}
-          - gem-cache
-
-      - run:
-        name: Bundle Install
-        command: bundle check --path=vendor/bundle || bundle install --path vendor/bundle --clean --jobs 4 --retry 3
-
-      - save_cache:
-        key: gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-        paths:
-          - ./vendor/bundle
-
-      - run:
-          name: Setup database
-          command: |
-            bundle exec rails db:create
-            bundle exec rails db:migrate
-            bundle exec rails db:seed
-      - run:
-          name: Run rspec
-          command: bundle exec rspec
+  # rspec:
+  #   working_directory: ~/comic
+  #   docker:
+  #     - image: circleci/ruby:2.5.1
+  #       environment:
+  #         RAILS_ENV: test
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #       keys:
+  #         - gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+  #         - gem-cache-{{ arch }}-{{ .Branch }}
+  #         - gem-cache
+  #     - run:
+  #       name: Bundle Install
+  #       command: bundle check --path=vendor/bundle || bundle install --path vendor/bundle --clean --jobs 4 --retry 3
+  #     - save_cache:
+  #       key: gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+  #       paths:
+  #         - ./vendor/bundle
+  #     - run:
+  #         name: Setup database
+  #         command: |
+  #           bundle exec rails db:create
+  #           bundle exec rails db:migrate
+  #           bundle exec rails db:seed
+  #     - run:
+  #         name: Run rspec
+  #         command: bundle exec rspec
 
   rubocop:
     working_directory: ~/comic
@@ -71,6 +68,10 @@ jobs:
           name: Run post-deploy tasks
           command: |
             heroku git:remote -a $HEROKU_APP_NAME
+            heroku config:set AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            heroku config.set AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            heroku config:set S3_REGION=$S3_REGION
+            heroku config:set S3_BUCKET=$S3_BUCKET
             heroku run rails db:migrate
 
 orbs:

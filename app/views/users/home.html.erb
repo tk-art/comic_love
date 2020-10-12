@@ -12,10 +12,13 @@
     </div>
     <div class="col-md-8 feed-posts">
       <h2>みんなのオススメ漫画！</h2>
-      <% @post.each do |p| %>
-        <%= render p %>
+      <% if !current_user.nil? %>
+        <%= render @post_feeds %>
+        <%= paginate @post_feeds %>
+      <% else %>
+        <%= render @posts %>
+        <%= paginate @posts %>
       <% end %>
-      <%= paginate @post %>
     </div>
   </div>
 </div>

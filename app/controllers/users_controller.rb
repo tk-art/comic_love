@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   def home
     @categories = Category.page(params[:page])
-    @post = current_user.feed.includes(:user).page(params[:page]).order(created_at: 'DESC').per(10)
+    @posts = Post.includes(:user).page(params[:page]).order(created_at: 'DESC').per(10)
+    @post_feeds = current_user.feed.includes(:user).page(params[:page]).order(created_at: 'DESC').per(10) if user_signed_in?
   end
 
   def about; end
@@ -24,7 +25,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.page(params[:page]).order(created_at: 'DESC').per(10)
-    @image = @user.image.url
+    @image = @user.image.to_s
   end
 
   def following

@@ -4,6 +4,30 @@ RSpec.describe 'Users', type: :system do
   describe 'Sign In' do
     let(:user) { create(:user) }
 
+    describe 'guest user login' do
+      let!(:user1) { create(:user, email: 'guest@g.com') }
+
+      before do
+        visit root_path
+        click_link 'ゲストログイン'
+      end
+
+      it 'ゲストログインリンクを押すと、ログインできる' do
+        expect(page).to have_content 'ゲストユーザーとしてログインしました！'
+      end
+
+      it 'アカウント削除,編集ができない' do
+        visit user_path(user1)
+        click_on 'アカウントを削除する'
+        expect(page).to have_content 'ゲストユーザーの編集、削除はできません！'
+        visit user_path(user1)
+        click_on 'プロフィールを編集する'
+        fill_in 'email', with: 'kkk@g.com'
+        click_on '更新する'
+        expect(page).to have_content 'ゲストユーザーの編集、削除はできません！'
+      end
+    end
+
     context '有効な値が入力された場合' do
       it 'rootに飛んで、flashが表示され、ログインが完了する' do
         sign_in(user.email, user.password)

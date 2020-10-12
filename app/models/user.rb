@@ -26,6 +26,12 @@ class User < ApplicationRecord
   validates :profile, length: { maximum: 140 }
   mount_uploader :image, ImageUploader
 
+  def self.guest
+    find_or_create_by!(email: 'guest@g.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+    end
+  end
+
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
   end

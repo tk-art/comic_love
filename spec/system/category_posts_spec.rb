@@ -22,10 +22,8 @@ RSpec.describe 'Category', type: :system do
     end
 
     it 'カテゴリーリンクを踏むと、そのカテゴリーに属する投稿がでる' do
-      expect(page).to have_content post.title
-      click_on post.title
-      expect(page).to have_content post.title
-      expect(page).not_to have_content post1.title
+      click_on category.name
+      expect(page).to have_content "カテゴリー（#{category.name})"
     end
 
     it '投稿詳細では、投稿が属するカテゴリー名が表示されている' do
