@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  before_create :default_image
+  # before_create :default_image
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :lockable, :validatable
 
@@ -71,12 +71,10 @@ class User < ApplicationRecord
                      OR user_id = :user_id", user_id: id)
   end
 
-  private
-
-  def default_image
-    unless image.attached?
-      image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default.jpg')),
-                   filename: 'display-image.jpg', content_type: 'image/jpg')
-    end
-  end
+  # def default_image
+  #   unless image.attached?
+  #     image.attach(io: File.open('/app/assets/images/default.jpg'),
+  #                  filename: 'display-image.jpg', content_type: 'image/jpg')
+  #   end
+  # end
 end

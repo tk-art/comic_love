@@ -3,7 +3,11 @@
   <div class="row">
     <h3 class="prof">プロフィール</h3>
     <div class="col-md-4">
-      <%= image_tag @image, class: "icon-image", alt: "icon-image" %>
+      <% if @image.attached? %>
+        <%= image_tag @image, class: "icon-image", alt: "icon-image" %>
+      <% else %>
+        <%= image_tag ('default.jpg'), class: "icon-image", alt: "icon-image" %>
+      <% end %>
     </div>
     <div class="col-md-8">
       <div class="user_follow">

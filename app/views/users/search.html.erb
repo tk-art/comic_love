@@ -12,7 +12,11 @@
       <div class="users">
         <% @users.each do |user| %>
           <li>
-            <%= image_tag user.image, class: "icon3", alt: "icon-image" %>
+            <% if user.image.attached? %>
+              <%= image_tag user.image, class: "icon3", alt: "icon-image" %>
+            <% else %>
+              <%= image_tag ('default.jpg'), class: "icon3", alt: "icon-image" %>
+            <% end %>
             <%= link_to user.name, user, class: "search-user-name" %>
           </li>
         <% end %>
