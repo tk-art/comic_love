@@ -68,7 +68,10 @@ jobs:
           name: Run post-deploy tasks
           command: |
             heroku git:remote -a $HEROKU_APP_NAME
-            heroku config:set RAILS_MASTER_KEY=`cat config/master.key`
+            heroku config.set AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            heroku config.set AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            heroku config.set S3_REGION=$S3_REGION
+            heroku config.set S3_BUCKET=$S3_BUCKET
             heroku run rails db:migrate
 
 orbs:
