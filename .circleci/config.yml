@@ -68,7 +68,7 @@ jobs:
           name: Run post-deploy tasks
           command: |
             heroku git:remote -a $HEROKU_APP_NAME
-            heroku config:set RAILS_MASTER_KEY=$RAILS_MASTER_KEY
+            heroku config:set RAILS_MASTER_KEY=`cat config/master.key`
             heroku run rails db:migrate
 
 orbs:
