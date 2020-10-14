@@ -1,4 +1,4 @@
 <li>
-  <%= image_tag polymorphic_url(user.image), class: "icon2", alt: "icon-image" %>
+  <%= image_tag url_for(user.image), class: "icon2", alt: "icon-image" %>
   <%= link_to user.name, user %>
 </li>

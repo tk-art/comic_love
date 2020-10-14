@@ -74,7 +74,6 @@ class User < ApplicationRecord
   private
 
   def default_image
-    # image.attach(File.open(Rails.root.join('app', 'assets', 'images', 'default.jpg'))) unless image.attached?
     unless image.attached?
       image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default.jpg')),
                    filename: 'display-image.jpg', content_type: 'image/jpg')
