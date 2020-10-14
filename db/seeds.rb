@@ -14,3 +14,13 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+Category.create(name: '少年漫画')
+Category.create(name: '少女漫画')
+Category.create(name: 'ギャグ')
+Category.create(name: '恋愛')
+Category.create(name: 'スポーツ')
+Category.create(name: 'アクション')
+Category.create(name: 'ホラー')
+Category.create(name: 'サスペンス')
+Category.create(name: 'ファンタジー')

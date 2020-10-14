@@ -1,5 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :check_guest, only: %i[update destroy]
+
   def after_sign_up_path_for(_resource)
     flash[:notice] = '登録に成功しました！プロフィールを充実させませんか？'
     edit_user_registration_path

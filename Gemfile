@@ -30,11 +30,10 @@ gem 'mini_magick', '~> 4.8'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'aws-sdk-s3', require: false
 gem 'bootstrap-sass', '3.4.1'
-gem 'carrierwave'
 gem 'dotenv-rails'
 gem 'faker'
-gem 'fog'
 gem 'font-awesome-sass'
 gem 'jquery-rails'
 gem 'kaminari'

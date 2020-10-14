@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  before_create :default_image
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :lockable, :validatable
 
@@ -24,7 +25,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 30 }
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true, allow_blank: true
   validates :profile, length: { maximum: 140 }
-  mount_uploader :image, ImageUploader
+  has_one_attached :image
 
   def self.guest
     find_or_create_by!(email: 'guest@g.com') do |user|
@@ -68,5 +69,11 @@ class User < ApplicationRecord
                      WHERE follower_id = :user_id"
     Post.where("user_id IN (#{following_ids})
                      OR user_id = :user_id", user_id: id)
+  end
+
+  private
+
+  def default_image
+    image.attach(File.open(Rails.root.join('app', 'assets', 'images', 'default.jpg'))) unless image.attached?
   end
 end

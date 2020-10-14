@@ -12,7 +12,7 @@
         <% else %>
           <span>
             <%= link_to post_path(notification.post) do %>
-              <%= image_tag notification.post.user.image.url, class: "icon4" %>
+              <%= image_tag notification.post.user.image, class: "icon4" %>
               <strong><%= "#{notification.post.user.name}さんの投稿" %></strong>
             <% end %>
             <span>にコメントしました</span>

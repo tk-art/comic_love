@@ -1,5 +1,4 @@
-$(function() {
-  /* SP menu */
+$(document.addEventListener("turbolinks:load", function() {
   function toggleNav() {
       var body = document.body;
       var hamburger = document.getElementById('nav_btn');
@@ -12,4 +11,4 @@ $(function() {
       });
   }
   toggleNav();
-});
+}));

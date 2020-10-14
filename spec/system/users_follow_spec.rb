@@ -8,6 +8,10 @@ RSpec.describe 'Follow, Unfollow', type: :system do
 
   before do
     sign_in(michael.email, michael.password)
+    michael.image = fixture_file_upload('/files/default.jpg')
+    archer.image = fixture_file_upload('/files/default.jpg')
+    lana.image = fixture_file_upload('/files/default.jpg')
+    malory.image = fixture_file_upload('/files/default.jpg')
     michael.follow(archer)
     michael.follow(lana)
     archer.follow(michael)
@@ -76,6 +80,12 @@ RSpec.describe 'Follow, Unfollow', type: :system do
 
   describe 'following page' do
     let(:user) { create_list(:user, 30) }
+
+    before do
+      user.each do |u|
+        u.image = fixture_file_upload('/files/default.jpg')
+      end
+    end
 
     it 'following pageでは自分がフォローしているユーザーが表示されている' do
       visit following_user_path(michael)

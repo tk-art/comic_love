@@ -13,6 +13,7 @@ RSpec.describe 'Notification' do
 
     before do
       sign_in(user1.email, user1.password)
+      user.image = fixture_file_upload('/files/default.jpg')
     end
 
     it '通知リンクを踏むと、通知一覧ページに移動する' do

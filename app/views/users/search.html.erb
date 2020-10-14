@@ -12,7 +12,7 @@
       <div class="users">
         <% @users.each do |user| %>
           <li>
-            <%= image_tag user.image.url, class: "icon3", alt: "icon-image" %>
+            <%= image_tag user.image, class: "icon3", alt: "icon-image" %>
             <%= link_to user.name, user, class: "search-user-name" %>
           </li>
         <% end %>

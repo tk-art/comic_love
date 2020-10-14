@@ -6,6 +6,7 @@ RSpec.describe 'Post', type: :system do
 
   before do
     sign_in(user.email, user.password)
+    user.image = fixture_file_upload('/files/default.jpg')
   end
 
   describe 'new edit' do

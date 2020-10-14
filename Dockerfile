@@ -25,7 +25,7 @@ RUN apt-get update                                                              
     libmariadbclient18															\
     libmariadbclient-dev-compat														\
     libmariadbclient-dev														\
-  && apt-get install -y --allow-unauthenticated						   					                                                                  \
+  && apt-get install -y --allow-unauthenticated				   					                                                                  \
     libmysqlclient-dev                                                                                                                  \
     mysql-client                                                                                                                        \
     libxml2-dev                                                                                                                         \

@@ -7,6 +7,10 @@ RSpec.describe 'Users', type: :system do
 
     before do
       sign_in(michael.email, michael.password)
+      michael.image = fixture_file_upload('/files/default.jpg')
+      user.each do |u|
+        u.image = fixture_file_upload('/files/default.jpg')
+      end
     end
 
     it '全てのユーザーを表示する、ドロップダウンのリンクが期待通り動作する' do

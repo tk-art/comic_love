@@ -19,13 +19,13 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.page(params[:page]).order(id: 'DESC').per(15)
+    @users = User.includes(:image_attachment).page(params[:page]).order(id: 'DESC').per(15)
   end
 
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.page(params[:page]).order(created_at: 'DESC').per(10)
-    @image = @user.image.to_s
+    @image = @user.image
   end
 
   def following

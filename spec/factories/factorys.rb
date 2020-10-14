@@ -4,7 +4,6 @@ FactoryBot.define do
     sequence(:email) { |n| "person_#{n}@example.com" }
     password { 'foobar' }
     password_confirmation { 'foobar' }
-    image { File.open('./spec/fixtures/files/default.jpg', 'r') }
     profile { 'はじめたばかりなので、宜しく' }
   end
 

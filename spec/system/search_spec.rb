@@ -8,6 +8,11 @@ RSpec.describe 'Search', type: :system do
 
     before do
       sign_in(user.email, user.password)
+      user.image = fixture_file_upload('/files/default.jpg')
+      other_user.image = fixture_file_upload('/files/default.jpg')
+      malti_user.each do |user|
+        user.image = fixture_file_upload('/files/default.jpg')
+      end
       visit searching_path
     end
 

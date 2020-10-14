@@ -3,14 +3,14 @@
   <div class="row">
     <div class="col-md-4">
       <section class="user_info">
-        <%= image_tag @user.image.url, class: "icon", alt: "icon-image" %>
+        <%= image_tag @user.image, class: "icon", alt: "icon-image" %>
         <h2>
           <%= link_to @user do %>
             <i class="far fa-user-circle"> <%= @user.name %></i>
           <% end %>
         </h2>
         <%= render 'shared/stat' %>
-        <%# <span><b>Microposts:</b> <%= @user.microposts.count %>
+        <span><b>投稿数:</b> <%= @user.posts.count %></span>
       </section>
     </div>
     <div class="col-md-8">

@@ -9,6 +9,7 @@ RSpec.describe 'Users', type: :system do
 
       before do
         visit root_path
+        user1.image = fixture_file_upload('/files/default.jpg')
         click_link 'ゲストログイン'
       end
 
