@@ -7,10 +7,9 @@ jobs:
         environment:
           RAILS_ENV: test
           MYSQL_HOST: 127.0.0.1
-      - image: circleci/mysql:8.0
-        environment:
           MYSQL_USER: root
-          MYSQL_ROOT_PASSWORD: password
+          MYSQL_PASSWORD: password
+      - image: circleci/mysql:8.0
     steps:
       - checkout
       - restore_cache:
@@ -20,7 +19,7 @@ jobs:
             - gem-cache
       - run:
           name: Bundle Install
-          command: bundle check --path=vendor/bundle || bundle install --path vendor/bundle --clean --jobs 4 --retry 3
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --clean --jobs=4 --retry=3
       - save_cache:
           key: gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
