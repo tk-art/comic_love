@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  # before_create :default_image
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :lockable, :validatable
 
@@ -27,8 +26,10 @@ class User < ApplicationRecord
   validates :profile, length: { maximum: 140 }
   has_one_attached :image
 
+  # guest@g.com
+
   def self.guest
-    find_or_create_by!(email: 'guest@g.com') do |user|
+    find_or_create_by!(email: 'ta1.pioneer.t@gmail.com') do |user|
       user.password = SecureRandom.urlsafe_base64
     end
   end
@@ -70,11 +71,4 @@ class User < ApplicationRecord
     Post.where("user_id IN (#{following_ids})
                      OR user_id = :user_id", user_id: id)
   end
-
-  # def default_image
-  #   unless image.attached?
-  #     image.attach(io: File.open('/app/assets/images/default.jpg'),
-  #                  filename: 'display-image.jpg', content_type: 'image/jpg')
-  #   end
-  # end
 end

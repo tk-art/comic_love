@@ -5,7 +5,7 @@ RSpec.describe 'Users', type: :system do
     let(:user) { create(:user) }
 
     describe 'guest user login' do
-      let!(:user1) { create(:user, email: 'guest@g.com') }
+      let!(:user1) { create(:user, email: 'ta1.pioneer.t@gmail.com') }
 
       before do
         visit root_path

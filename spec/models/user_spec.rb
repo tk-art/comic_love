@@ -61,7 +61,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'guest userを取ってくる' do
-      guest_user = create(:user, email: 'guest@g.com')
+      guest_user = create(:user, email: 'ta1.pioneer.t@gmail.com')
       expect(User.guest).to eq guest_user
     end
   end

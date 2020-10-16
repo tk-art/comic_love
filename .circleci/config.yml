@@ -1,34 +1,33 @@
-version: 2.1
+version: 2
 jobs:
-  # rspec:
-  #   working_directory: ~/comic
-  #   docker:
-  #     - image: circleci/ruby:2.5.1
-  #       environment:
-  #         RAILS_ENV: test
-  #   steps:
-  #     - checkout
-  #     - restore_cache:
-  #       keys:
-  #         - gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-  #         - gem-cache-{{ arch }}-{{ .Branch }}
-  #         - gem-cache
-  #     - run:
-  #       name: Bundle Install
-  #       command: bundle check --path=vendor/bundle || bundle install --path vendor/bundle --clean --jobs 4 --retry 3
-  #     - save_cache:
-  #       key: gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-  #       paths:
-  #         - ./vendor/bundle
-  #     - run:
-  #         name: Setup database
-  #         command: |
-  #           bundle exec rails db:create
-  #           bundle exec rails db:migrate
-  #           bundle exec rails db:seed
-  #     - run:
-  #         name: Run rspec
-  #         command: bundle exec rspec
+  rspec:
+    working_directory: ~/comic
+    docker:
+      - image: circleci/ruby:2.5.1
+        environment:
+          RAILS_ENV: test
+    steps:
+      - checkout
+      - restore_cache:
+        keys:
+          - gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          - gem-cache-{{ .Branch }}
+          - gem-cache
+      - run:
+        name: Bundle Install
+        command: bundle check --path=vendor/bundle || bundle install --path vendor/bundle --clean --jobs 4 --retry 3
+      - save_cache:
+        key: gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        paths:
+          - ./vendor/bundle
+      - run:
+          name: Setup database
+          command: |
+            bundle exec rails db:create
+            bundle exec rails db:migrate
+      - run:
+          name: Run rspec
+          command: bundle exec rspec
 
   rubocop:
     working_directory: ~/comic
@@ -75,13 +74,13 @@ orbs:
   build-tools: circleci/build-tools@2.6.3
   jq: circleci/jq@1.9.1
 workflows:
-  version: 2.1
+  version: 2
   build:
     jobs:
-      # - rspec
+      - rspec
       - rubocop
       - heroku_deploy:
           context: BUILD_CIRCLECI
           requires:
-            # - rspec
+            - rspec
             - rubocop
