@@ -9,7 +9,7 @@ jobs:
           MYSQL_HOST: 127.0.0.1
       - image: circleci/mysql:8.0
         environment:
-          MYSQL_USER: root
+          MYSQL_USER: username
           MYSQL_PASSWORD: password
           MYSQL_DB: comic_test
     steps:
@@ -29,7 +29,7 @@ jobs:
       - run:
           name: Setup database
           command: |
-            dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
+            dockerize -wait tcp://127.0.0.1:3306 -timeout 2m
             bundle exec rails db:create
             bundle exec rails db:migrate
       - run:
