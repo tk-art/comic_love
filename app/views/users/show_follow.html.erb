@@ -3,13 +3,17 @@
   <div class="row">
     <div class="col-md-4">
       <section class="user_info">
-        <%= image_tag @user.image, class: "icon", alt: "icon-image" %>
+        <% if @user.image.attached? %>
+          <%= image_tag @user.image, class: "icon", alt: "icon-image" %>
+        <% else %>
+          <%= image_tag ('default.jpg'), class: "icon", alt: "icon-image" %>
+        <% end %>
         <h2>
           <%= link_to @user do %>
             <i class="far fa-user-circle"> <%= @user.name %></i>
           <% end %>
         </h2>
-        <%= render 'shared/stat' %>
+        <%= render 'shared/stat', user: @user %>
         <span><b>投稿数:</b> <%= @user.posts.count %></span>
       </section>
     </div>
