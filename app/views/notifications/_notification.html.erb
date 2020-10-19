@@ -1,19 +1,18 @@
 <% visitor = notification.visitor %>
-<% visited = notification.visited %>
 <div class="form-inline">
   <span>
-    <%= image_tag visitor.image, class: "icon4" %>
     <strong><%= visitor.name %>さんが</strong>
     <% case notification.action %>
       <% when 'follow' then %>
+        <%= image_tag current_user.image, class: "icon4" if current_user.image.attached? %>
         <span>あなたをフォローしました</span>
       <% when 'comment' then %>
-        <%= image_tag notification.post.user.image, class: "icon4" %>
+        <%= image_tag current_user.image, class: "icon4" if current_user.image.attached? %>
         <%= link_to "あなたの投稿", notification.post, style: "font-weight: bold;" %><span>にコメントしました</span>
         <p class="comment-n"><%= Comment.find_by(id: notification.comment_id)&.content %></p>
     <% end %>
   </span>
   <div class="small text-muted text-right">
-    <%= time_ago_in_words(notification.created_at).upcase %>
+    <%= time_ago_in_words(notification.created_at) %>
   </div>
 </div>

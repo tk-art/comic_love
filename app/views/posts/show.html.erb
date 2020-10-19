@@ -10,7 +10,6 @@
         <% @categories.each do |category| %>
           <h5 class="category-name"><%= link_to category.name, category_path(category.id) %></h5>
         <% end %>
-
         <h3><%= @post.title %></h3>
         <span class="user">投稿者: <%= link_to @post.user.name, @post.user %></span>
         <h4><%= link_to '楽天で確認する', @post.url, class: "item-url" %></h4>
