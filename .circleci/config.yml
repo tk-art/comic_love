@@ -1,39 +1,5 @@
-version: 2
+version: 2.1
 jobs:
-  rspec:
-    working_directory: ~/comic
-    docker:
-      - image: circleci/ruby:2.5.1
-        environment:
-          RAILS_ENV: test
-          MYSQL_HOST: 127.0.0.1
-      - image: circleci/mysql
-        environment:
-          MYSQL_ROOT_PASSWORD: password
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gem-cache-{{ .Branch }}
-            - gem-cache
-      - run:
-          name: Bundle Install
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --clean --jobs=4 --retry=3
-      - save_cache:
-          key: gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - ./vendor/bundle
-      - run: dockerize -wait tcp://127.0.0.1:3306 -timeout 2m
-      - run:
-          name: Setup database
-          command: |
-            bundle exec rails db:create
-            bundle exec rails db:migrate
-      - run:
-          name: Run rspec
-          command: bundle exec rspec
-
   rubocop:
     working_directory: ~/comic
     docker:
@@ -82,10 +48,8 @@ workflows:
   version: 2
   build:
     jobs:
-      - rspec
       - rubocop
       - heroku_deploy:
           context: BUILD_CIRCLECI
           requires:
-            - rspec
             - rubocop

@@ -26,8 +26,6 @@ class User < ApplicationRecord
   validates :profile, length: { maximum: 140 }
   has_one_attached :image
 
-  # guest@g.com
-
   def self.guest
     find_or_create_by!(email: 'ta1.pioneer.t@gmail.com') do |user|
       user.password = SecureRandom.urlsafe_base64

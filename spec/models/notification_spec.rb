@@ -22,18 +22,8 @@ RSpec.describe Notification, type: :model do
     let!(:comment) { Comment.create(user_id: other_user.id, post_id: post.id, content: 'ii') }
     let!(:comment1) { Comment.create(user_id: user.id, post_id: post.id, content: 'ee') }
 
-    it 'commentのデータを持ってくる際に、自分のコメントは取ってこない' do
-      comment = Comment.select(:user_id).where(post_id: post.id).where.not(user_id: user.id).distinct
-      expect(comment.count).to eq 2
-      comments = []
-      comment.each do |c|
-        comments << c['user_id']
-      end
-      expect(comments[1]).to eq other_user.id
-    end
-
     it 'commentに対して、notificationモデルにsaveされる' do
-      post.create_notification_comment!(user, comment.id)
+      post.save_notification_comment!(other_user, comment.id, post.user.id)
       expect(
         Notification.where(['visitor_id = ? and visited_id = ? and post_id = ? and
               comment_id = ? and action = ? ', other_user.id, post.user.id, post.id, comment.id, 'comment'])
@@ -41,7 +31,7 @@ RSpec.describe Notification, type: :model do
     end
 
     it 'コメントした側と、コメントされた投稿を持つ側が同じならcheckedカラムがtrueになる' do
-      post.create_notification_comment!(other_user1, comment1.id)
+      post.save_notification_comment!(user, comment1.id, post.user.id)
       expect(
         Notification.where(['visitor_id = ? and visited_id = ? and post_id = ? and
           comment_id = ? and action = ? and checked = ?', user.id, post.user.id, post.id, comment1.id, 'comment', 'true'])

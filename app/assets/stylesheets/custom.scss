@@ -230,6 +230,15 @@ aside {
   overflow: hidden;
 }
 
+.icon4 {
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+  border-radius: 100px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
 .follow-btn {
   display: inline-block;
   padding: 0.3em 1em;
@@ -449,26 +458,31 @@ aside {
 
 //comment
 
-.border-top {
-  p {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid darkgray;
-    box-shadow: 0 1px 1px lightgray;
-  }
-}
-.comments {
+.comment-n {
   margin-top: 10px;
-  margin-bottom: 10px;
-  height: 200px;
-  overflow: scroll;
-  p {
-    width: 700px;
-    word-wrap: break-word;
-    padding-left: 10px;
-  }
+  margin-left: 10px;
 }
+
+// .border-top {
+//   p {
+//     margin-top: 10px;
+//     margin-bottom: 10px;
+//     padding-bottom: 5px;
+//     border-bottom: 1px solid darkgray;
+//     box-shadow: 0 1px 1px lightgray;
+//   }
+// }
+// .comments {
+//   margin-top: 10px;
+//   margin-bottom: 10px;
+//   height: 200px;
+//   overflow: scroll;
+//   p {
+//     width: 700px;
+//     word-wrap: break-word;
+//     padding-left: 10px;
+//   }
+// }
 
 //category
 
@@ -497,9 +511,9 @@ aside {
 }
 
 .category-name {
-  display: inline;
+  display: inline-block;
   padding: 10px 20px;
-  margin: 20px 10px;
+  margin: 5px 10px;
   border: 1px solid rgb(42, 117, 67);
   border-radius: 20px;
   a {
@@ -509,6 +523,7 @@ aside {
     }
   }
 }
+
 
 .related-posts {
   padding-right: 30px;
