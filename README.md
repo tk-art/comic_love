@@ -1,25 +1,56 @@
-# README
+# アプリ名
+COMIC SHARE
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# デプロイ済みURL
+ [デプロイ済みアプリ](https://afternoon-brushlands-02535.herokuapp.com/ "デプロイ済みアプリ")
+ 
+# 何ができるか
+このアプリでは、家にいる時間が増えた今、オススメの漫画をシェアしていただくことを目的に作成しました
+簡単な使い方としましては、自分がオススメしたい漫画を探していただき、自分のオススメポイントを添えて
+投稿していただくというようなものです
 
-Things you may want to cover:
+# ポイント
+投稿者が自分のオススメポイント以外に入力する手間を省くため、楽天APIからのデータを自動でフォームに入力されるようにしています
+投稿者側には、あくまで教えていただくということなので、いいね機能やランキングなどで格付けしてしまうような機能は実装しておりません
+あまり、強い色を使いたくなかったので、白を基調として、ヘッダーホバー時などだけ、人が癒されるような緑を使用しております
+テストでは、capybaraを使用したsystem specを多めに書いております
 
-* Ruby version
+# 検索用DEMO
+![search_demo](https://user-images.githubusercontent.com/58266008/96631727-a8311600-1351-11eb-950e-3b847edfd8e1.gif)
 
-* System dependencies
 
-* Configuration
+# 主に使用した技術
+- ruby:2.5.1
+- rails:5.2.4
+- mysql:8.0
+- rspec:3.9
+- devise:4.7.2
 
-* Database creation
+# 実装した機能
+- 新規登録機能
+- ログイン機能
+- ゲストログイン機能
+- ログアウト機能
+- ユーザー一覧表示機能
+- ユーザー詳細表示機能
+- ユーザー編集機能
+- ユーザー退会機能
+- フォロー機能
+- 楽天APIを使用した投稿機能
+- 投稿編集機能
+- 投稿削除機能
+- キーワード検索機能
+- カテゴリー別投稿一覧表示機能
+- コメント投稿機能
+- フォロー、コメント時にのみ通知機能
+- 通知全削除機能
+- 投稿やユーザーに対するページネーション機能
 
-* Database initialization
+# その他
+- docker-composeを使用した環境構築
+- circleciを使用して、rubocop, heroku-deploy実行
+- rspecによる自動テスト
+- active storageを使用した、aws s3への画像アップロード
+- レスポンシブデザインを意識して、ヘッダーなどを変更
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# comic_love
