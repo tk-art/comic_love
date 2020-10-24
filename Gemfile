@@ -32,7 +32,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'aws-sdk-s3', require: false
 gem 'bootstrap-sass', '3.4.1'
-gem 'dotenv-rails'
 gem 'faker'
 gem 'font-awesome-sass'
 gem 'jquery-rails'
